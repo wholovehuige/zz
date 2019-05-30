@@ -89,13 +89,13 @@ public class HomePage {
     public JSONArray testGetApi() {
         JSONArray array = new JSONArray();
         JSONObject object1 = new JSONObject();
-        object1.put("title", "张莉娜");
-        object1.put("image_url", "");
+        object1.put("title", "张老师");
+        object1.put("image_url", "../../images/bars/zln.jpg");
         object1.put("description", "健康观念治疗联合发起人，拥有本公司课程代理和推广的权利，官方授权课程代理，请您放心");
 
         JSONObject object2 = new JSONObject();
         object2.put("title", "许大夫");
-        object2.put("image_url", "");
+        object2.put("image_url", "../../images/bars/laotou.png");
         object2.put("description", "肾病专家，有着30多年中医诊疗经验，在肾小球坏死90%都可以完全治愈的老专家");
         array.add(object2);
         array.add(object1);

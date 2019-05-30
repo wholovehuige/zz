@@ -7,6 +7,7 @@ import com.aliyun.oss.model.PutObjectResult;
 import com.cecdat.convert.entity.BaseResponse;
 import com.cecdat.convert.entity.QuestionRequest;
 import com.cecdat.convert.utils.FileOperationUtil;
+import com.cecdat.convert.utils.LogUtils;
 import com.cecdat.convert.utils.MultiClientsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,12 +65,18 @@ public class FileRestApi {
     @ResponseBody
     public BaseResponse uploadFile(String queId, String openId, String title, String content, @RequestParam(value = "img", required = false) MultipartFile file) {
         String fileName = file.getOriginalFilename();
-        System.out.println(queId);
-        System.out.println(openId);
-        System.out.println(title);
-        System.out.println(content);
-
-        System.out.println("===========");
+        StringBuilder builder = new StringBuilder("{\"queId\":");
+        builder.append("\""+queId+"\"");
+        builder.append(",\"openId\":");
+        builder.append("\""+openId+"\"");
+        builder.append(" ,\"title\":");
+        builder.append("\""+title+"\"");
+        builder.append(",\"content\":");
+        builder.append("\""+content+"\"");
+        builder.append(",\"fileName\"");
+        builder.append("\""+fileName+"\"");
+        builder.append("}");
+        LogUtils.logAccessApi(builder.toString());
         return new BaseResponse(200);
     }
 
