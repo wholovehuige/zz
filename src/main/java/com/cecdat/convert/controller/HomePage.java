@@ -4,9 +4,10 @@ package com.cecdat.convert.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.cecdat.convert.entity.BaseResponse;
-import com.cecdat.convert.entity.QuestionRequest;
+import com.cecdat.convert.config.BaseResponse;
+import com.cecdat.convert.config.QuestionRequest;
 import com.cecdat.convert.service.HomeService;
+import com.cecdat.convert.service.MyPersonInfoService;
 import com.cecdat.convert.service.WxGetParamService;
 import com.cecdat.convert.utils.HttpUtils;
 import com.cecdat.convert.utils.LogUtils;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -27,6 +29,8 @@ public class HomePage {
 
     @Autowired
     private HomeService homeService;
+    @Autowired
+    private MyPersonInfoService infoService;
 
     @RequestMapping(path = "/")
     public String toHomePage() {
@@ -174,7 +178,17 @@ public class HomePage {
         return response;
     }
 
-
+    @GetMapping(path = "/person")
+    @ResponseBody
+    public BaseResponse getPersonInfo(@RequestParam Integer id) {
+        BaseResponse response = new BaseResponse();
+        try {
+            response.setData(infoService.getInfo());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
 
 
 

@@ -1,4 +1,4 @@
-package com.cecdat.convert.entity;
+package com.cecdat.convert.config;
 
 import java.io.Serializable;
 

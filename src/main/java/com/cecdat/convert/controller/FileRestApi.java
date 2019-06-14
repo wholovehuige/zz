@@ -2,24 +2,18 @@ package com.cecdat.convert.controller;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.Bucket;
-import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
-import com.cecdat.convert.entity.BaseResponse;
-import com.cecdat.convert.entity.QuestionRequest;
-import com.cecdat.convert.utils.FileOperationUtil;
+import com.cecdat.convert.config.BaseResponse;
 import com.cecdat.convert.utils.LogUtils;
 import com.cecdat.convert.utils.MultiClientsUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.util.List;
 
