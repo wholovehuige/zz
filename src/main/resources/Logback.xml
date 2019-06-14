@@ -12,7 +12,7 @@
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
-            <fileNamePattern>../logs/%d{yyyy-MM-dd}/error.log</fileNamePattern>
+            <fileNamePattern>../../myLogs/%d{yyyy-MM-dd}/error.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -24,7 +24,7 @@
     <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
-            <fileNamePattern>../logs/%d{yyyy-MM-dd}/access.log</fileNamePattern>
+            <fileNamePattern>../../myLogs/%d{yyyy-MM-dd}/access.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -36,7 +36,7 @@
     <appender name="apiACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
-            <fileNamePattern>../logs/%d{yyyy-MM-dd}/api-access.log</fileNamePattern>
+            <fileNamePattern>../../myLogs/%d{yyyy-MM-dd}/api-access.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>

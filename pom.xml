@@ -75,7 +75,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.sqoop/sqoop -->
     </dependencies>
     <build>
-        <finalName>ROOT</finalName>
+        <finalName>dbjb</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
