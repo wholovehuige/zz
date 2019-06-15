@@ -18,6 +18,7 @@
         <start-class>com.cecdat.convert.Application</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <lombok.version>1.16.18</lombok.version>
         <version.ojdbc6>11.1.0.7</version.ojdbc6>
         <version.postgresql>42.1.4</version.postgresql>
         <version.elasticsearch>5.5.0</version.elasticsearch>
@@ -42,11 +43,17 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <!--打包的时候可以不用包进去，别的设施会提供。事实上该依赖理论上可以参与编译，测试，运行等周期。
                 相当于compile，但是打包阶段做了exclude操作-->
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -93,15 +100,15 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <!--阿里云仓库-->
-        <repository>
-            <id>ali</id>
-            <name>ali Repository</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+    <!--<repositories>-->
+        <!--&lt;!&ndash;阿里云仓库&ndash;&gt;-->
+        <!--<repository>-->
+            <!--<id>ali</id>-->
+            <!--<name>ali Repository</name>-->
+            <!--<url>http://maven.aliyun.com/nexus/content/groups/public/</url>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
+    <!--</repositories>-->
 </project>

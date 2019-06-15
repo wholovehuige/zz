@@ -16,13 +16,13 @@ public class HomeService {
         for(int i = 0 ;i<12;i++) {
             PageGoods pageGoods1 = new PageGoods();
             pageGoods1.setId(i);
-            pageGoods1.setgName("10-12岁袜子=="+i);
+            pageGoods1.setGName("10-12岁袜子=="+i);
             pageGoods1.setMinPrice("12.8" + i);
             pageGoods1.setOriginalPrice("33.5" + i);
-            pageGoods1.setgPrice("10.99" + i);
-            pageGoods1.setgImageUrl("https://cdn.it120.cc/apifactory/2017/10/30/bc15e96f20fb13cc7d35f90d743ccb17.jpg");
+            pageGoods1.setGPrice("10.99" + i);
+            pageGoods1.setGImageUrl("https://cdn.it120.cc/apifactory/2017/10/30/bc15e96f20fb13cc7d35f90d743ccb17.jpg");
             pageGoods1.setUserId("4352345");
-            pageGoods1.setgStutas(1);
+            pageGoods1.setGStatus(1);
             pageGoodsList.add(pageGoods1);
         }
         return pageGoodsList;
