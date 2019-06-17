@@ -22,8 +22,10 @@ public class EnterpriseInfo {
     String wxNumber;
     String sDescription;
     String sAddress;
-    String latitude;
-    String longitude;
+    Double latitude;
+    Double longitude;
+    Integer likeNumber;
+    Integer viewNumber;
     Date createDate;
 
 }

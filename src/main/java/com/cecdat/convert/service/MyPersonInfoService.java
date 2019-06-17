@@ -34,8 +34,8 @@ public class MyPersonInfoService {
         enterpriseInfo.setSDescription("牛逼玩具店是专门卖玩具的");
         enterpriseInfo.setSAddress("西安市碑林区XXX街道");
         enterpriseInfo.setOpenTime("09:00-21:00");
-        enterpriseInfo.setLatitude("经度");
-        enterpriseInfo.setLongitude("维度");
+        enterpriseInfo.setLatitude(39.987231);
+        enterpriseInfo.setLongitude(116.329236);
         enterpriseInfo.setCreateDate(new Date(1560600271));
         return enterpriseInfo;
     }
