@@ -46,10 +46,10 @@
         </encoder>
     </appender>
     <!-- 日志输出级别 -->
-    <root level="debug">
+    <!--<root level="debug">-->
         <!--<appender-ref ref="STDOUT" />-->
         <!--<appender-ref ref="ACCESS" />-->
-    </root>
+    <!--</root>-->
     <logger name="org.apache" level="info">
         <appender-ref ref="STDOUT"/>
     </logger>
