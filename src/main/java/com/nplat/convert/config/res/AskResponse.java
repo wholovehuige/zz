@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AskResponse {
-    Integer id;
+    Long id;
     Integer personId;
     String nickName;
     String avataUrl;

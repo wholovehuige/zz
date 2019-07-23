@@ -1,25 +1,28 @@
 package com.nplat.convert.utils;
 
-import com.aliyun.oss.OSSClient;
 
 
 public class MultiClientsUtils {
 
-    private static  OSSClient ossClient;
+//    private static  OSSClient ossClient;
+//
+//
+//    public MultiClientsUtils() {
+//    }
+//
+//    public static OSSClient getOSSClient(String endpoint,String accessKeyId,String accessKeySecret) {
+//        if(ossClient == null) {
+//            synchronized (MultiClientsUtils.class) {
+//                if(ossClient == null) {
+//                    ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
+//                }
+//            }
+//        }
+//        return ossClient;
+//    }
 
 
-    public MultiClientsUtils() {
-    }
 
-    public static OSSClient getOSSClient(String endpoint,String accessKeyId,String accessKeySecret) {
-        if(ossClient == null) {
-            synchronized (MultiClientsUtils.class) {
-                if(ossClient == null) {
-                    ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
-                }
-            }
-        }
-        return ossClient;
-    }
+
 
 }

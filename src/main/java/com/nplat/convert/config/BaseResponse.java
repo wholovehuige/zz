@@ -14,20 +14,12 @@ public class BaseResponse implements Serializable {
         return this.resCode;
     }
 
-    public void setResCode(int resCode) {
-        this.resCode = resCode;
-    }
-
     public String getResDes() {
-        return this.resDes;
-    }
-
-    public void setResDes(String resDes) {
-        this.resDes = resDes;
+        return resDes;
     }
 
     public Object getData() {
-        return this.data;
+        return data;
     }
 
     public void setData(Object data) {
@@ -39,23 +31,7 @@ public class BaseResponse implements Serializable {
         this.resDes = ApiMsgEnum.OK.getResDes();
     }
 
-    public BaseResponse(int code, String msg) {
-        this.resCode = code;
-        this.resDes = msg;
-        this.data = "";
-    }
 
-    public BaseResponse(int code, Exception e) {
-        this.resCode = code;
-        this.resDes = e.getMessage();
-        this.data = "";
-    }
-
-    public BaseResponse(int code, String msg, Exception e) {
-        this.resCode = code;
-        this.resDes = msg;
-        this.data = "";
-    }
 
     public BaseResponse(Object data) {
         this.resCode = ApiMsgEnum.OK.getResCode();
@@ -63,13 +39,7 @@ public class BaseResponse implements Serializable {
         this.data = data;
     }
 
-    public BaseResponse(Exception exp) {
-        this.resCode = 500;
-        this.resDes = exp.getMessage();
-        this.data = "";
-    }
-
-    public BaseResponse(ApiMsgEnum msgEnum) {
+    public void setMsgEnum(ApiMsgEnum msgEnum) {
         this.resCode = msgEnum.getResCode();
         this.resDes = msgEnum.getResDes();
         this.data = "";

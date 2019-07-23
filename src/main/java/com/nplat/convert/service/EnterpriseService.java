@@ -1,17 +1,16 @@
 package com.nplat.convert.service;
 
+import com.nplat.convert.dao.AskForEnterpriseMapper;
+import com.nplat.convert.dao.EnterpriseInfoMapper;
+import com.nplat.convert.dao.EnterpriseTypeMapper;
+import com.nplat.convert.dao.PersonInfoMapper;
 import com.nplat.convert.entity.AskForEnterprise;
 import com.nplat.convert.entity.EnterpriseInfo;
-import com.nplat.convert.entity.PersonInfo;
-import com.nplat.convert.mapper.AskForEnterpriseMapper;
-import com.nplat.convert.mapper.EnterpriseInfoMapper;
-import com.nplat.convert.mapper.PersonInfoMapper;
+import com.nplat.convert.entity.EnterpriseType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,101 +23,113 @@ public class EnterpriseService {
     @Autowired
     private PersonInfoMapper personInfoMapper;
     @Autowired
-    private OSSOptionService ossOptionService;
+    private QiNiuService ossOptionService;
+    @Autowired
+    private EnterpriseTypeMapper enterpriseTypeMapper;
 
+    //申请成为商户
     @Transactional
-    public PersonInfo createApplyEnterprise(Integer pid) {
-        PersonInfo personInfo = personInfoMapper.selectById(pid);
-        HashMap hashMap = new HashMap();
-        hashMap.put("id", pid);
-        hashMap.put("uLevel", 1);
-        personInfoMapper.updateInfoById(hashMap);
-        Integer eId = createInfoForEnterpriseInfo(pid);
+    public void createApplyEnterprise(String personId, String nickName, String avataUrl, Long referenceId) {
         AskForEnterprise askForEnterprise = new AskForEnterprise();
-        askForEnterprise.setPersonId(pid);
-        askForEnterprise = askForEnterpriseMapper.selectOne(askForEnterprise);
-        if (askForEnterprise == null) {
-            askForEnterprise = new AskForEnterprise();
-            askForEnterprise.setPersonId(pid);
-            askForEnterprise.setNickName(personInfo.getNickName());
-            askForEnterprise.setAvataUrl(personInfo.getAvataUrl());
-            askForEnterprise.setEnterpriseId(eId);
-            askForEnterprise.setStatus(0);
-            askForEnterpriseMapper.insert(askForEnterprise);
-        }
-        personInfo.setULevel(1);
-        return personInfo;
+        askForEnterprise.setNickName(nickName);
+        askForEnterprise.setPersonId(personId);
+        askForEnterprise.setAvataUrl(avataUrl);
+        askForEnterprise.setStatus(referenceId);
+        askForEnterpriseMapper.createInfo(askForEnterprise);
+        HashMap hashMap = new HashMap();
+        hashMap.put("personId", personId);
+        hashMap.put("uLevel", 1);
+        personInfoMapper.updateInfoBy(hashMap);
     }
 
-    public Integer createInfoForEnterpriseInfo(Integer pid) {
-        EnterpriseInfo enterpriseInfo = getEnterpriseInfo(pid);
-        if (enterpriseInfo == null) {
-            enterpriseInfo = new EnterpriseInfo();
-            enterpriseInfo.setPersonId(pid);
-            enterpriseInfo.setLikeNumber(0);
-            enterpriseInfo.setMyPassed(0);
-            enterpriseInfo.setViewNumber(0);
-            enterpriseInfo.setStatus(0);
-            enterpriseInfoMapper.insert(enterpriseInfo);
-            return enterpriseInfo.getId();
+    //查看申请商户列表
+    public List<AskForEnterprise> searchAskEnterprises(Long id) {
+        return askForEnterpriseMapper.selectAskByStatus(id);
+    }
+
+    //同意商户申请
+    public Integer createInfoForEnterpriseInfo(String personId) {
+        AskForEnterprise askForEnterprise = askForEnterpriseMapper.selectByUserId(personId);
+        if (askForEnterprise  == null) {
+           return 0;
         } else {
-            return enterpriseInfo.getId();
+            EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
+            enterpriseInfo.setPersonId(personId);
+            enterpriseInfo.setsType(0);
+            enterpriseInfo.setStatus(0);
+            enterpriseInfoMapper.createInfo(enterpriseInfo);
+            return 0;
         }
     }
 
+    //查询商户类型
+    public  List<EnterpriseType> getEnterpriseType(){
+        return enterpriseTypeMapper.getEnterpriseType();
+    }
+
+    //商户类型操作
+    public void createEnterpriseType(String name) {
+        enterpriseTypeMapper.createInfo(name);
+    }
+
+    //修改商户信息
     @Transactional
-    public void updateEnterpriseInfo(Integer id,
-                                     Integer personId,
+    public void updateEnterpriseInfo(String personId,
+                                     Long id,
+                                     Integer sType,
                                      String sName,
-                                     String uName,
                                      String sPhone,
-                                     String wxNumber,
-                                     String sAddress,
+                                     String sImage,
                                      String openTime,
+                                     String wxNumber,
                                      String sDescription,
-                                     MultipartFile imageFile,
+                                     String sAddress,
                                      Double latitude,
                                      Double longitude) {
-        try {
-            String imageUrl = ossOptionService.setFileToOss(imageFile);
-            HashMap info = new HashMap();
-            info.put("id", personId);
-            info.put("uLevel", 3);
-            personInfoMapper.updateInfoById(info);
             HashMap hashMap = new HashMap();
             hashMap.put("id", id);
+            hashMap.put("sType", sType);
             hashMap.put("sName", sName);
-            hashMap.put("uName", uName);
             hashMap.put("sPhone", sPhone);
-            hashMap.put("wxNumber", wxNumber);
-            hashMap.put("sAddress", sAddress);
+            hashMap.put("sImage", sImage);
             hashMap.put("openTime", openTime);
+            hashMap.put("wxNumber", wxNumber);
             hashMap.put("sDescription", sDescription);
-            hashMap.put("sImage", imageUrl);
+            hashMap.put("sAddress", sAddress);
             hashMap.put("latitude", latitude);
             hashMap.put("longitude", longitude);
             enterpriseInfoMapper.updateInfoById(hashMap);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+
+            HashMap info = new HashMap();
+            info.put("personId", personId);
+            info.put("uLevel", 3);  //认证之后设置等级
+            personInfoMapper.updateInfoBy(info);
     }
 
-    public List<EnterpriseInfo> getEnterpriseInfos(Double lat, Double lon,Integer page,Integer size) {
+    //查询附近商户
+    public List<EnterpriseInfo> getEnterpriseInfos(Double lat, Double lon, Integer page, Integer size) {
         Integer offset = page * size;
         HashMap hashMap = new HashMap();
         hashMap.put("latitude", lat);
         hashMap.put("longitude", lon);
         hashMap.put("offset", offset);
         hashMap.put("size", size);
-        List<EnterpriseInfo> list=  enterpriseInfoMapper.getNearEnterpriseInfos(hashMap);
-        System.out.println("lat="+lat +"    lon="+lon+"    page="+page+"  ==  size="+size +  "    total=" + list.size());
-        return  list;
+        List<EnterpriseInfo> list = null;
+        System.out.println("lat=" + lat + "    lon=" + lon + "    page=" + page + "  ==  size=" + size + "    total=" + list.size());
+        return list;
     }
 
-    public EnterpriseInfo getEnterpriseInfo(Integer personId) {
-        EnterpriseInfo info = new EnterpriseInfo();
-        info.setPersonId(personId);
-        return enterpriseInfoMapper.selectOne(info);
+    //查询商户详情
+    public EnterpriseInfo getEnterpriseInfoByPersonId(String personId) {
+        HashMap hashMap = new HashMap();
+        hashMap.put("personId", personId);
+        return enterpriseInfoMapper.getEnterpriseInfoBy(hashMap);
+    }
+    //查询商户详情
+    public EnterpriseInfo getEnterpriseInfoById(Long id) {
+        HashMap hashMap = new HashMap();
+        hashMap.put("id", id);
+        return enterpriseInfoMapper.getEnterpriseInfoBy(hashMap);
     }
 
 }
