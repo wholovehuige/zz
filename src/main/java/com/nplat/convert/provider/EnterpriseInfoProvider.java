@@ -110,5 +110,21 @@ public class EnterpriseInfoProvider {
         }}.toString();
     }
 
+    public String getInfoPageAndSize(final HashMap hashMap) {
+        Object currentPosition = hashMap.get("currentPosition");
+        Object size =hashMap.get("size");
+        SQL sql =  new SQL(){{
+            SELECT("id ,s_name ,s_image ,round((6371 * acos (cos ( radians(#{latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(#{longitude}) )+ sin ( radians(#{latitude}) ) * sin( radians( latitude ) ) )),3) AS distance");
+            FROM(tableName);
+            WHERE("status = 0");
+            ORDER_BY("distance asc");
+        }};
+        StringBuilder builder = new StringBuilder(sql.toString());
+        builder.append(" limit ");
+        builder.append(currentPosition);
+        builder.append(",");
+        builder.append(size);
+        return builder.toString();
+    }
 
 }

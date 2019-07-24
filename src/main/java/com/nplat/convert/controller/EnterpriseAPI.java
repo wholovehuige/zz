@@ -4,6 +4,7 @@ import com.nplat.convert.basePackage.request.AgreeEnterpriseRequest;
 import com.nplat.convert.basePackage.request.AskForEnterpriseRequest;
 import com.nplat.convert.basePackage.request.EnterpriseInfoRequest;
 import com.nplat.convert.basePackage.request.EnterpriseTypeRequest;
+import com.nplat.convert.basePackage.request.NearEnperpriseRequest;
 import com.nplat.convert.config.ApiMsgEnum;
 import com.nplat.convert.config.BaseResponse;
 import com.nplat.convert.service.EnterpriseService;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class EnterpriseAPI {
@@ -123,5 +127,23 @@ public class EnterpriseAPI {
             return response;
         }
         return response;
+    }
+
+
+
+    //修改商户信息
+    @PostMapping(path = "/enterprise/infos")
+    @ResponseBody
+    public BaseResponse nearEnterprise(@RequestBody NearEnperpriseRequest request) {
+        BaseResponse response = new BaseResponse();
+        try {
+            List<HashMap> nearEnterpriseList = enterpriseService.searchNearEnterprise(request.getCurrentPosition(),request.getSize(),request.getLatitude(),request.getLongitude());
+            response.setData(nearEnterpriseList);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
+            return response;
+        }
     }
 }

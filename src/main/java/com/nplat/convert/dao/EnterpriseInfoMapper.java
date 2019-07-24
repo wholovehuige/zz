@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.UpdateProvider;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Mapper
 @Repository
@@ -26,5 +27,9 @@ public interface EnterpriseInfoMapper {
 
     @SelectProvider(type = EnterpriseInfoProvider.class ,method = "getPersonInfoByDynamic")
     EnterpriseInfo getEnterpriseInfoBy(HashMap hashMap);
+
+
+    @SelectProvider(type = EnterpriseInfoProvider.class ,method = "getInfoPageAndSize")
+    List<HashMap> searchEnterpriseInfoPageSize(HashMap hashMap);
 
 }

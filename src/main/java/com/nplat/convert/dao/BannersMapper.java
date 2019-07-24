@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface BannersMapper {
 
-    @Select("select id,enterprise_id,pic_url,status,create_date from banners ")
+    @Select("select id,enterprise_id,pic_url,status,create_date from banners where status = 0")
     List<Banners> selectBanners();
 
 }

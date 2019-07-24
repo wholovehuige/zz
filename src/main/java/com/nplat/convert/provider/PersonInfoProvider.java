@@ -94,10 +94,10 @@ public class PersonInfoProvider {
         return  new SQL(){{
             SELECT(columns);
             FROM(tableName);
-            if(null != hashMap.get("id") && "".equals(hashMap.get("id"))) {
+            if(null != hashMap.get("id")) {
                 WHERE("id = #{id}");
             }
-            if(null != hashMap.get("personId") && "".equals(hashMap.get("personId"))) {
+            if(null != hashMap.get("personId")) {
                 WHERE("person_id = #{personId}");
             }
         }}.toString();

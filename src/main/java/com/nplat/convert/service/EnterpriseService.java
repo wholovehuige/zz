@@ -23,23 +23,27 @@ public class EnterpriseService {
     @Autowired
     private PersonInfoMapper personInfoMapper;
     @Autowired
-    private QiNiuService ossOptionService;
-    @Autowired
     private EnterpriseTypeMapper enterpriseTypeMapper;
 
     //申请成为商户
     @Transactional
-    public void createApplyEnterprise(String personId, String nickName, String avataUrl, Long referenceId) {
-        AskForEnterprise askForEnterprise = new AskForEnterprise();
-        askForEnterprise.setNickName(nickName);
-        askForEnterprise.setPersonId(personId);
-        askForEnterprise.setAvataUrl(avataUrl);
-        askForEnterprise.setStatus(referenceId);
-        askForEnterpriseMapper.createInfo(askForEnterprise);
-        HashMap hashMap = new HashMap();
-        hashMap.put("personId", personId);
-        hashMap.put("uLevel", 1);
-        personInfoMapper.updateInfoBy(hashMap);
+    public String createApplyEnterprise(String personId, String nickName, String avataUrl, Long referenceId) {
+        AskForEnterprise askForEnterprise = askForEnterpriseMapper.selectByUserId(personId);
+        if(askForEnterprise == null) {
+            askForEnterprise = new AskForEnterprise();
+            askForEnterprise.setNickName(nickName);
+            askForEnterprise.setPersonId(personId);
+            askForEnterprise.setAvataUrl(avataUrl);
+            askForEnterprise.setStatus(referenceId);
+            askForEnterpriseMapper.createInfo(askForEnterprise);
+            HashMap hashMap = new HashMap();
+            hashMap.put("personId", personId);
+            hashMap.put("uLevel", 1);
+            personInfoMapper.updateInfoBy(hashMap);
+            return personId;
+        }else {
+            return null;
+        }
     }
 
     //查看申请商户列表
@@ -130,6 +134,15 @@ public class EnterpriseService {
         HashMap hashMap = new HashMap();
         hashMap.put("id", id);
         return enterpriseInfoMapper.getEnterpriseInfoBy(hashMap);
+    }
+
+    public  List<HashMap> searchNearEnterprise(Integer currentPosition,Integer size,Double latitude,Double longitude){
+        HashMap hashMap = new HashMap();
+        hashMap.put("currentPosition",currentPosition);
+        hashMap.put("size",size);
+        hashMap.put("latitude",latitude);
+        hashMap.put("longitude",longitude);
+        return enterpriseInfoMapper.searchEnterpriseInfoPageSize(hashMap);
     }
 
 }
