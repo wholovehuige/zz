@@ -18,33 +18,6 @@ public class EnterpriseInfoProvider {
         if (enterpriseInfo.getsType() != null) {
             sql.VALUES("s_type", String.valueOf(enterpriseInfo.getsType()));
         }
-        if (enterpriseInfo.getsName() != null) {
-            sql.VALUES("s_name", String.valueOf(enterpriseInfo.getsName()));
-        }
-        if (enterpriseInfo.getsPhone() != null) {
-            sql.VALUES("s_phone", enterpriseInfo.getsPhone());
-        }
-        if (enterpriseInfo.getsImage() != null) {
-            sql.VALUES("s_image", enterpriseInfo.getsImage());
-        }
-        if (enterpriseInfo.getOpenTime() != null) {
-            sql.VALUES("open_time", String.valueOf(enterpriseInfo.getOpenTime()));
-        }
-        if (enterpriseInfo.getWxNumber() != null) {
-            sql.VALUES("wx_number", enterpriseInfo.getWxNumber());
-        }
-        if (enterpriseInfo.getsDescription() != null) {
-            sql.VALUES("s_description", enterpriseInfo.getsDescription());
-        }
-        if (enterpriseInfo.getsAddress() != null) {
-            sql.VALUES("s_address", enterpriseInfo.getsAddress());
-        }
-        if (enterpriseInfo.getLatitude() != null) {
-            sql.VALUES("latitude", String.valueOf(enterpriseInfo.getLatitude()));
-        }
-        if (enterpriseInfo.getLongitude() != null) {
-            sql.VALUES("longitude", String.valueOf(enterpriseInfo.getLongitude()));
-        }
         if (enterpriseInfo.getStatus() != null) {
             sql.VALUES("status", String.valueOf(enterpriseInfo.getStatus()));
         }

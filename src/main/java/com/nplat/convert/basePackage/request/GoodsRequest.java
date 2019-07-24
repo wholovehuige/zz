@@ -1,10 +1,9 @@
-package com.nplat.convert.entity;
+package com.nplat.convert.basePackage.request;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 
-public class EnterpriseGoods {
-    private Long id;
+public class GoodsRequest {
 
     private String personId;
 
@@ -20,24 +19,14 @@ public class EnterpriseGoods {
 
     private BigDecimal longitude;
 
-    private Integer status;
-
-    private Date createDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private List<String>  goodImages;
 
     public String getPersonId() {
         return personId;
     }
 
     public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
+        this.personId = personId;
     }
 
     public String getbName() {
@@ -45,7 +34,7 @@ public class EnterpriseGoods {
     }
 
     public void setbName(String bName) {
-        this.bName = bName == null ? null : bName.trim();
+        this.bName = bName;
     }
 
     public String getbDesc() {
@@ -53,7 +42,7 @@ public class EnterpriseGoods {
     }
 
     public void setbDesc(String bDesc) {
-        this.bDesc = bDesc == null ? null : bDesc.trim();
+        this.bDesc = bDesc;
     }
 
     public BigDecimal getbRealPrise() {
@@ -88,19 +77,11 @@ public class EnterpriseGoods {
         this.longitude = longitude;
     }
 
-    public Integer getStatus() {
-        return status;
+    public List<String> getGoodImages() {
+        return goodImages;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setGoodImages(List<String> goodImages) {
+        this.goodImages = goodImages;
     }
 }
