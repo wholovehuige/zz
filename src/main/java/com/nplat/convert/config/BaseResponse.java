@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by roy on 2019/2/18.
  */
-public class BaseResponse implements Serializable {
+public class BaseResponse{
     protected int resCode;
     protected String resDes;
     protected Object data;

@@ -1,13 +1,18 @@
 package com.nplat.convert.controller;
 
 import com.nplat.convert.basePackage.request.GoodsRequest;
+import com.nplat.convert.basePackage.response.GoodsResponse;
 import com.nplat.convert.config.BaseResponse;
 import com.nplat.convert.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class GoodsAPI {
@@ -35,5 +40,22 @@ public class GoodsAPI {
             return response;
         }
     }
+
+
+    @GetMapping(path = "/user/good/info/{personId}")
+    @ResponseBody
+    public BaseResponse userGoodInfo(@PathVariable String personId) {
+        BaseResponse response = new BaseResponse();
+        try {
+            List<GoodsResponse> goodsResponseList =  goodsService.searchByPersonId(personId);
+            response.setData(goodsResponseList);
+            return response;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return response;
+        }
+    }
+
+
 
 }

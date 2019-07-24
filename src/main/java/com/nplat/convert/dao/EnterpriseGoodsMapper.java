@@ -1,5 +1,6 @@
 package com.nplat.convert.dao;
 
+import com.nplat.convert.basePackage.response.GoodsResponse;
 import com.nplat.convert.entity.EnterpriseGoods;
 import com.nplat.convert.provider.EnterpriseGoodsProvider;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -19,9 +20,8 @@ public interface EnterpriseGoodsMapper {
     int insert(EnterpriseGoods record);
 
 
-    @Select("id,person_id,b_name,b_desc,b_real_prise ,b_price, latitude ,longitude ,status,create_date  from enterprise_goods where person_id = #{personId} where status = 0")
-    List<EnterpriseGoods> selectByPersonId(String personId);
-
+    @Select("select id,person_id,b_name,b_desc,b_real_prise ,b_price  ,create_date  from enterprise_goods where person_id = #{personId} and status = 0")
+    List<GoodsResponse> selectByPersonId(String personId);
 
 
 

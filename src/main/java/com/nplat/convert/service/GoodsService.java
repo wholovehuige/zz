@@ -1,5 +1,6 @@
 package com.nplat.convert.service;
 
+import com.nplat.convert.basePackage.response.GoodsResponse;
 import com.nplat.convert.dao.EnterpriseGoodsMapper;
 import com.nplat.convert.dao.GoodsImagesMapper;
 import com.nplat.convert.entity.EnterpriseGoods;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -41,5 +43,15 @@ public class GoodsService {
         return enterpriseGoods.getId();
     }
 
+
+    public List<GoodsResponse>  searchByPersonId(String personId){
+        List<GoodsResponse>  enterpriseGoods =  enterpriseGoodsMapper.selectByPersonId(personId);
+        for(GoodsResponse response : enterpriseGoods) {
+            List<HashMap> imgUrls = goodsImagesMapper.selectUrlByGoodId(response.getId());
+            response.setCreateDate(response.getCreateDate().substring(0,19));
+            response.setImages(imgUrls);
+        }
+        return enterpriseGoods;
+    }
 
 }
