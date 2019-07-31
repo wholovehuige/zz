@@ -28,8 +28,7 @@ public enum ApiMsgEnum {
     HIVE_EXCEPTION(14000, "hive throw exception"),
     HIVE_TABLE_EXISTS(14001, "table already exists"),
     HIVE_CREATE_TABLE_FAILED(14002, "create table failed"),
-    INPUT_ERROR(55, "input error"),
-    FILE_ALREADY_EXISTS(90001,"file exists in HDFS");
+    INPUT_ERROR(55, "input error");
     private int resCode;
     private String resDes;
     public static Map<Integer, String> apiMsgMap = new HashMap();

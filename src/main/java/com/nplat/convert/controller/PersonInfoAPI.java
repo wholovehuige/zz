@@ -6,7 +6,6 @@ import com.nplat.convert.basePackage.request.LoginRequest;
 import com.nplat.convert.basePackage.request.PersonInfoRequest;
 import com.nplat.convert.config.BaseResponse;
 import com.nplat.convert.entity.PersonInfo;
-import com.nplat.convert.service.HomeService;
 import com.nplat.convert.service.PersonInfoService;
 import com.nplat.convert.service.WxGetParamService;
 import com.nplat.convert.utils.HttpUtils;
@@ -54,7 +53,7 @@ public class PersonInfoAPI {
             } else if (errCode == 40029) {
                 id = infoService.createPersonInfo("openId");
             }
-            LogUtils.apiAccessLog(res);
+            LogUtils.API_ACCESS_LOG.info(res);
             hashMap.put("id",id);
             hashMap.put("userId",id);
             response.setData(hashMap);

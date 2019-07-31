@@ -2,7 +2,7 @@ package com.nplat.convert.basePackage.request;
 
 
 public class EnterpriseInfoRequest {
-
+    Long referenceId;
     String personId;
     Long id;
     Integer sType;
@@ -15,6 +15,15 @@ public class EnterpriseInfoRequest {
     String sAddress;
     Double latitude;
     Double longitude;
+
+
+    public Long getReferenceId() {
+        return referenceId;
+    }
+
+    public void setReferenceId(Long referenceId) {
+        this.referenceId = referenceId;
+    }
 
     public String getPersonId() {
         return personId;

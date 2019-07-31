@@ -8,6 +8,7 @@ import com.nplat.convert.basePackage.request.NearEnperpriseRequest;
 import com.nplat.convert.config.ApiMsgEnum;
 import com.nplat.convert.config.BaseResponse;
 import com.nplat.convert.service.EnterpriseService;
+import com.nplat.convert.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,7 @@ public class EnterpriseAPI {
         try {
             enterpriseService.createEnterpriseType(request.getName());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.ERROR_LOG.error("商户类型操作=",e);
             response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
             return response;
         }
