@@ -4,6 +4,7 @@ import com.nplat.convert.basePackage.request.GoodsRequest;
 import com.nplat.convert.basePackage.response.GoodsResponse;
 import com.nplat.convert.config.BaseResponse;
 import com.nplat.convert.service.GoodsService;
+import com.nplat.convert.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,7 @@ public class GoodsAPI {
             response.setData(goodsResponseList);
             return response;
         }catch (Exception e) {
+            LogUtils.ERROR_LOG.error("=", e);
             e.printStackTrace();
             return response;
         }

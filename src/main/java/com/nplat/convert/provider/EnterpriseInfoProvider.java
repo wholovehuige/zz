@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class EnterpriseInfoProvider {
     final static String tableName = "enterprise_info";
-    final static String columns = "id,person_id,s_type,s_name,s_phone,s_image,open_time,wx_number,s_description,s_address,latitude,longitude,status,create_date";
+    final static String columns = "id,reference_id,person_id,s_type,s_name,s_phone,s_image,open_time,wx_number,s_description,s_address,latitude,longitude,status,create_date";
 
     public String insert(final EnterpriseInfo enterpriseInfo) {
         SQL sql = new SQL();
@@ -15,11 +15,41 @@ public class EnterpriseInfoProvider {
         if (enterpriseInfo.getPersonId() != null) {
             sql.VALUES("person_id", "'" + enterpriseInfo.getPersonId() + "'");
         }
+        if (enterpriseInfo.getReferenceId() != null) {
+            sql.VALUES("reference_id", "'" + enterpriseInfo.getReferenceId() + "'");
+        }
         if (enterpriseInfo.getsType() != null) {
-            sql.VALUES("s_type", String.valueOf(enterpriseInfo.getsType()));
+            sql.VALUES("s_type","'"+ String.valueOf(enterpriseInfo.getsType())+"'");
+        }
+        if (enterpriseInfo.getsName() != null) {
+            sql.VALUES("s_name", "'" + enterpriseInfo.getsName() + "'");
+        }
+        if (enterpriseInfo.getsPhone() != null) {
+            sql.VALUES("s_phone", "'" + enterpriseInfo.getsPhone() + "'");
+        }
+        if (enterpriseInfo.getsImage() != null) {
+            sql.VALUES("s_image", "'" + enterpriseInfo.getsImage() + "'");
+        }
+        if (enterpriseInfo.getOpenTime() != null) {
+            sql.VALUES("open_time", "'" + enterpriseInfo.getOpenTime() + "'");
+        }
+        if (enterpriseInfo.getWxNumber() != null) {
+            sql.VALUES("wx_number", "'" + enterpriseInfo.getWxNumber() + "'");
+        }
+        if (enterpriseInfo.getsDescription() != null) {
+            sql.VALUES("s_description", "'" + enterpriseInfo.getsDescription() + "'");
+        }
+        if (enterpriseInfo.getsAddress() != null) {
+            sql.VALUES("s_address", "'" + enterpriseInfo.getsAddress() + "'");
+        }
+        if (enterpriseInfo.getLatitude() != null) {
+            sql.VALUES("latitude", "'" + enterpriseInfo.getLatitude() + "'");
+        }
+        if (enterpriseInfo.getLongitude() != null) {
+            sql.VALUES("longitude", "'" + enterpriseInfo.getLongitude() + "'");
         }
         if (enterpriseInfo.getStatus() != null) {
-            sql.VALUES("status", String.valueOf(enterpriseInfo.getStatus()));
+            sql.VALUES("status", "'"+String.valueOf(enterpriseInfo.getStatus())+"'");
         }
         sql.VALUES("create_date", " now()");
         return sql.toString();
@@ -43,6 +73,9 @@ public class EnterpriseInfoProvider {
         return new SQL() {{
             UPDATE(tableName);
             //条件写法.
+            if (hashMap.get("referenceId") != null) {
+                SET("reference_id=#{referenceId}");
+            }
             if (hashMap.get("personId") != null) {
                 SET("person_id=#{personId}");
             }

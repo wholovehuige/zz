@@ -55,7 +55,7 @@ public class PersonInfoAPI {
             }
             LogUtils.API_ACCESS_LOG.info(res);
             hashMap.put("id",id);
-            hashMap.put("userId",id);
+            hashMap.put("personId",openId);
             response.setData(hashMap);
             return response;
         } catch (Exception e) {
@@ -85,7 +85,7 @@ public class PersonInfoAPI {
     @ResponseBody
     public BaseResponse updatePersonInfo(@RequestBody  PersonInfoRequest request) {
         BaseResponse response = new BaseResponse();
-        infoService.updatePersonInfo(request.getId(),request.getuLevel(),request.getNickName(),request.getAvatarUrl(),request.getGender(),
+        infoService.updatePersonInfo(request.getId(),request.getNickName(),request.getAvatarUrl(),request.getGender(),
                 request.getCountry(),request.getProvince(),request.getCity(),request.getPersonalQrCode(),request.getFans(),request.getuPhoneNumber());
         return response;
     }

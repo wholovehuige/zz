@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
 
+    <!--<property name="log.dir" value="d:/myLogs/"/>-->
     <property name="log.dir" value="/root/myLogs/"/>
     <!-- 控制台 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

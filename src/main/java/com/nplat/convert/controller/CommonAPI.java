@@ -3,6 +3,8 @@ package com.nplat.convert.controller;
 
 import com.nplat.convert.config.ApiMsgEnum;
 import com.nplat.convert.config.BaseResponse;
+import com.nplat.convert.entity.PlatformSvg;
+import com.nplat.convert.service.PlatformSvgService;
 import com.nplat.convert.service.QiNiuService;
 import com.nplat.convert.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class CommonAPI {
 
     @Autowired
     private QiNiuService qiNiuService;
+    @Autowired
+    private PlatformSvgService platformSvgService;
 
     @PostMapping(path = "/update/file")
     @ResponseBody
@@ -43,4 +47,23 @@ public class CommonAPI {
         return response;
     }
 
+    //查询所有用户数
+    @GetMapping(path = "/user/counts")
+    @ResponseBody
+    public BaseResponse allUsersCount() {
+        BaseResponse response = new BaseResponse();
+        PlatformSvg platformSvg = platformSvgService.selectPlatformSvg(1);
+        response.setData(platformSvg);
+        return response;
+    }
+
+    //查询所有商户数
+    @GetMapping(path = "/enterprise/count")
+    @ResponseBody
+    public BaseResponse allEnterpriseCount() {
+        BaseResponse response = new BaseResponse();
+        PlatformSvg platformSvg =  platformSvgService.selectPlatformSvg(2);
+        response.setData(platformSvg);
+        return response;
+    }
 }

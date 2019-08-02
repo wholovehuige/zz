@@ -1,14 +1,14 @@
 package com.nplat.convert.basePackage.request;
 
 public class AgreeEnterpriseRequest {
-    String personId;
+    Long id;
 
 
-    public String getPersonId() {
-        return personId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPersonId(String personId) {
-        this.personId = personId;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -1,5 +1,6 @@
 package com.nplat.convert.config;
 
+import com.nplat.convert.utils.LogUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +15,8 @@ public class AppInterceptor  implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String user = request.getHeader("user");
         if(null == user) {
-            response.sendRedirect("/dbjb/error/01");
+            LogUtils.API_ACCESS_LOG.info(request.getRequestURI());
+            response.sendRedirect("/error/01");
             return false;
         }else {
             return true;

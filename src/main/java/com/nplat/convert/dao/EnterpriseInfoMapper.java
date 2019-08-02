@@ -2,11 +2,7 @@ package com.nplat.convert.dao;
 
 import com.nplat.convert.entity.EnterpriseInfo;
 import com.nplat.convert.provider.EnterpriseInfoProvider;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -28,6 +24,8 @@ public interface EnterpriseInfoMapper {
     @SelectProvider(type = EnterpriseInfoProvider.class ,method = "getPersonInfoByDynamic")
     EnterpriseInfo getEnterpriseInfoBy(HashMap hashMap);
 
+    @Select("select id,person_id,s_name,s_image,create_date from enterprise_info where reference_id = #{personId}")
+    HashMap selectAskEnterprises(String personId);
 
     @SelectProvider(type = EnterpriseInfoProvider.class ,method = "getInfoPageAndSize")
     List<HashMap> searchEnterpriseInfoPageSize(HashMap hashMap);

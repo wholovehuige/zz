@@ -1,8 +1,10 @@
 package com.nplat.convert.basePackage.request;
 
 
+import java.math.BigDecimal;
+
 public class EnterpriseInfoRequest {
-    Long referenceId;
+    String referenceId;
     String personId;
     Long id;
     Integer sType;
@@ -13,15 +15,15 @@ public class EnterpriseInfoRequest {
     String wxNumber;
     String sDescription;
     String sAddress;
-    Double latitude;
-    Double longitude;
+    BigDecimal latitude;
+    BigDecimal longitude;
 
 
-    public Long getReferenceId() {
+    public String getReferenceId() {
         return referenceId;
     }
 
-    public void setReferenceId(Long referenceId) {
+    public void setReferenceId(String referenceId) {
         this.referenceId = referenceId;
     }
 
@@ -105,19 +107,19 @@ public class EnterpriseInfoRequest {
         this.sAddress = sAddress;
     }
 
-    public Double getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 
-    public Double getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 }

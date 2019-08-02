@@ -3,7 +3,6 @@ package com.nplat.convert.basePackage.request;
 public class PersonInfoRequest {
 
     Long id;
-    Integer uLevel;
     String avatarUrl;
     String city;
     String province;
@@ -20,14 +19,6 @@ public class PersonInfoRequest {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getuLevel() {
-        return uLevel;
-    }
-
-    public void setuLevel(Integer uLevel) {
-        this.uLevel = uLevel;
     }
 
     public String getAvatarUrl() {

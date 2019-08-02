@@ -32,12 +32,12 @@ public class EnterpriseAPI {
         BaseResponse response = new BaseResponse();
         try {
             enterpriseService.createEnterpriseType(request.getName());
+            return response;
         } catch (Exception e) {
-            LogUtils.ERROR_LOG.error("商户类型操作=",e);
+            LogUtils.ERROR_LOG.error("商户类型操作=", e);
             response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
             return response;
         }
-        return response;
     }
 
     //查询商户类型
@@ -47,41 +47,45 @@ public class EnterpriseAPI {
         BaseResponse response = new BaseResponse();
         try {
             response.setData(enterpriseService.getEnterpriseType());
+            return response;
         } catch (Exception e) {
+            LogUtils.ERROR_LOG.error("查询商户类型=", e);
             response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
             return response;
         }
-        return response;
     }
 
     //申请成为商户
-    @PostMapping(path = "/ask/enterprise")
+    @PostMapping(path = "/enterprise/info")
     @ResponseBody
-    public BaseResponse askForEnterprise(@RequestBody AskForEnterpriseRequest request) {
+    public BaseResponse AskEnterpriseInfo(@RequestBody EnterpriseInfoRequest request) {
         BaseResponse response = new BaseResponse();
         try {
-            enterpriseService.createApplyEnterprise(request.getPersonId(), request.getNickName(), request.getAvataUrl(), request.getReferenceId());
+            Long id = enterpriseService.createInfoForEnterpriseInfo(request.getReferenceId(), request.getPersonId(), request.getsType(), request.getsName(), request.getsPhone(), request.getImageFile(), request.getOpenTime(), request.getWxNumber(), request.getsDescription(), request.getsAddress(), request.getLatitude(), request.getLongitude());
+            response.setData(id);
+            return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.ERROR_LOG.error("申请成为商户=", e);
             response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
             return response;
         }
-        return response;
+
     }
 
-
     //查看申请商户列表
-    @GetMapping(path = "/ask/enterprise/infos/{id}")
+    @GetMapping(path = "/ask/enterprise/infos/{personId}")
     @ResponseBody
-    public BaseResponse getAskEnterpriseInfo(@PathVariable("id") Long id) {
+    public BaseResponse getAskEnterpriseInfo(@PathVariable("personId") String personId) {
         BaseResponse response = new BaseResponse();
         try {
-            response.setData(enterpriseService.searchAskEnterprises(id));
+            response.setData(enterpriseService.selectAskEnterprises(personId));
+            return response;
         } catch (Exception e) {
+            LogUtils.ERROR_LOG.error("查看申请商户列表=", e);
             response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
             return response;
         }
-        return response;
+
     }
 
     //同意商户申请
@@ -90,12 +94,13 @@ public class EnterpriseAPI {
     public BaseResponse agreeEnterprise(@RequestBody AgreeEnterpriseRequest request) {
         BaseResponse response = new BaseResponse();
         try {
-            enterpriseService.createInfoForEnterpriseInfo(request.getPersonId());
+            enterpriseService.agreeAskEnterprise(request.getId());
+            return response;
         } catch (Exception e) {
+            LogUtils.ERROR_LOG.error("同意商户申请=", e);
             response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
             return response;
         }
-        return response;
     }
 
     //查看商户信息
@@ -105,44 +110,46 @@ public class EnterpriseAPI {
         BaseResponse response = new BaseResponse();
         try {
             response.setData(enterpriseService.getEnterpriseInfoById(id));
+            return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.ERROR_LOG.error("查看商户信息=", e);
             response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
             return response;
         }
-        return response;
+
     }
 
 
     //修改商户信息
-    @PostMapping(path = "/enterprise/info")
+    @PostMapping(path = "/enterprise/update_info")
     @ResponseBody
     public BaseResponse updateEnterprise(@RequestBody EnterpriseInfoRequest request) {
         BaseResponse response = new BaseResponse();
         try {
-            enterpriseService.updateEnterpriseInfo(request.getPersonId(),
-                    request.getId(),request.getsType(),request.getsName(),request.getsPhone(),request.getImageFile(),request.getOpenTime(),
-                    request.getWxNumber(),request.getsDescription(),request.getsAddress(),request.getLatitude(),request.getLongitude());
+            enterpriseService.updateEnterpriseInfo(
+                    request.getId(), request.getsType(), request.getsName(), request.getsPhone(), request.getImageFile(), request.getOpenTime(),
+                    request.getWxNumber(), request.getsDescription(), request.getsAddress(), request.getLatitude(), request.getLongitude());
+            return response;
         } catch (Exception e) {
+            LogUtils.ERROR_LOG.error("修改商户信息=", e);
             response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
             return response;
         }
-        return response;
+
     }
 
 
-
-    //修改商户信息
+    //查询附近商户
     @PostMapping(path = "/enterprise/infos")
     @ResponseBody
     public BaseResponse nearEnterprise(@RequestBody NearEnperpriseRequest request) {
         BaseResponse response = new BaseResponse();
         try {
-            List<HashMap> nearEnterpriseList = enterpriseService.searchNearEnterprise(request.getCurrentPosition(),request.getSize(),request.getLatitude(),request.getLongitude());
+            List<HashMap> nearEnterpriseList = enterpriseService.searchNearEnterprise(request.getCurrentPosition(), request.getSize(), request.getLatitude(), request.getLongitude());
             response.setData(nearEnterpriseList);
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.ERROR_LOG.error("查询附近商户=", e);
             response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
             return response;
         }

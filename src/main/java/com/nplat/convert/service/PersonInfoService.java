@@ -28,7 +28,6 @@ public class PersonInfoService {
     }
 
     public void updatePersonInfo(Long id,
-                                 Integer uLevel,
                                  String nickName,
                                  String avataUrl,
                                  Integer gender,
@@ -40,7 +39,6 @@ public class PersonInfoService {
                                  String uPhoneNumber) {
         HashMap hashMap = new HashMap();
         hashMap.put("id",id);
-        hashMap.put("uLevel",uLevel);
         hashMap.put("nickName",nickName);
         hashMap.put("avataUrl",avataUrl);
         hashMap.put("gender",gender);

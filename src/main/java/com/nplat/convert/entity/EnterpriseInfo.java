@@ -8,6 +8,8 @@ public class EnterpriseInfo {
 
     private String personId;
 
+    private String referenceId;
+
     private Integer sType;
 
     private String sName;
@@ -46,6 +48,14 @@ public class EnterpriseInfo {
 
     public void setPersonId(String personId) {
         this.personId = personId == null ? null : personId.trim();
+    }
+
+    public String getReferenceId() {
+        return referenceId;
+    }
+
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
     }
 
     public Integer getsType() {

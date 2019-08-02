@@ -1,7 +1,9 @@
 package com.nplat.convert.controller;
 
+import com.nplat.convert.config.ApiMsgEnum;
 import com.nplat.convert.config.BaseResponse;
 import com.nplat.convert.service.HomeService;
+import com.nplat.convert.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +21,15 @@ public class HomePageAPI {
         BaseResponse response = new BaseResponse();
         try {
             response.setData(homeService.banners());
+            return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.ERROR_LOG.error("轮播图=", e);
+            response.setMsgEnum(ApiMsgEnum.INTERNAL_SERVER_ERROR);
+            return response;
         }
-        return response;
     }
 
-    //轮播图
+    //测试
     @GetMapping(path = "/test")
     @ResponseBody
     public BaseResponse test() {
