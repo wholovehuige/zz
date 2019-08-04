@@ -145,8 +145,13 @@ public class EnterpriseAPI {
     public BaseResponse nearEnterprise(@RequestBody NearEnperpriseRequest request) {
         BaseResponse response = new BaseResponse();
         try {
+            HashMap hashMap = new HashMap();
+            Integer currentPosition = request.getCurrentPosition();
             List<HashMap> nearEnterpriseList = enterpriseService.searchNearEnterprise(request.getCurrentPosition(), request.getSize(), request.getLatitude(), request.getLongitude());
-            response.setData(nearEnterpriseList);
+            currentPosition = currentPosition + nearEnterpriseList.size();
+            hashMap.put("currentPosition",currentPosition);
+            hashMap.put("nearList",nearEnterpriseList);
+            response.setData(hashMap);
             return response;
         } catch (Exception e) {
             LogUtils.ERROR_LOG.error("查询附近商户=", e);

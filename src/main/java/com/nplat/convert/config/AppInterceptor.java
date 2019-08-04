@@ -16,7 +16,7 @@ public class AppInterceptor  implements HandlerInterceptor {
         String user = request.getHeader("user");
         if(null == user) {
             LogUtils.API_ACCESS_LOG.info(request.getRequestURI());
-            response.sendRedirect("/error/01");
+            response.sendRedirect("/dbjb/error/01");
             return false;
         }else {
             return true;
